@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Metadatos esenciales para el navegador y la responsividad -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espléndida Manicuría - Noelia Bazán</title>
+  <meta name="description" content="Espléndida Manicuría en Sunchales: servicios profesionales de esmaltado semipermanente, capping gel, extensión soft gel, nail art y belleza de pies. Reserva tu turno por WhatsApp." />
+
+  <!-- Enlace a Tailwind CSS CDN para estilos rápidos y responsivos. Es una librería de CSS utility-first. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Enlace a Google Fonts para importar las fuentes. Es crucial que estas líneas funcionen. -->
+  <!-- Fuente principal del cuerpo: Lora, para un toque más delicado y elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- ¡IMPORTANTE! Fuente para "Tu esencia, tu estilo..." - Great Vibes (restaurada) -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="https://i.imgur.com/z9Fj0Fg.png" type="image/png">
+
+  <!-- Enlace a Font Awesome CDN para íconos vectoriales (ej. Instagram, WhatsApp). Corregido el atributo 'integrity'. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rljxV5E0+R9rX5/zB+b/pPzUqC+t1X5/V0f+y5+b5+g5+h5+i5+j5+k5+l5+m5+n5+o5+p5+q5+r5+s5+t5+u5+v5+w5+x5+y5+z5+05+15+25+35+45+55+65+75+85+95+a5+b5+c5+d5+e5+f5+g5+h5+i5+j5+k5+l5+m5+n5+o5+p5+q5+r5+s5+t5+u5+v5+w5+x5+y5+z5+" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Estilos CSS personalizados. Complementan Tailwind para elementos específicos o animaciones. -->
+  <style>
+    /* Asegura que el modelo de caja sea coherente en todos los elementos. */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* Estilos base para el cuerpo del documento. */
+    body {
+      font-family: 'Lora', serif; /* Cambiada a Lora para un toque más delicado */
+      background-color: #FDF7FA; /* Un lila muy claro y suave, casi blanco rosado */
+      color: #4A4A4A; /* Color de texto principal más suave */
+      margin: 0; /* Elimina el margen por defecto del navegador. */
+      padding: 0; /* Elimina el padding por defecto. */
+      padding-top: 64px; /* Ajusta este valor si la altura de tu encabezado es diferente. Esto empuja el contenido hacia abajo para evitar que se superponga con el encabezado fijo. */
+      overflow-x: hidden; /* Evita el scroll horizontal causado por el menú off-canvas */
+    }
+    /* Comportamiento de desplazamiento suave para anclas de navegación. */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Colores personalizados para un lila más profundo y vibrante */
+    .bg-custom-lilac-dark {
+      background-color: #6A407A; /* Lila oscuro más profundo y sofisticado */
+    }
+    .text-custom-lilac-dark {
+      color: #6A407A; /* Lila oscuro más profundo para texto */
+    }
+    .bg-custom-lilac-accent {
+      background-color: #C759C7; /* Un lila de acento vibrante y elegante */
+    }
+    .text-custom-lilac-accent {
+      color: #C759C7; /* Un lila de acento para texto */
+    }
+    .border-custom-lilac-accent {
+      border-color: #C759C7;
+    }
+    .hover\:bg-custom-lilac-dark-hover:hover {
+      background-color: #A845A8; /* Un lila más oscuro y vibrante para hover */
+    }
+    .focus\:ring-custom-lilac-accent:focus {
+      --tw-ring-color: #C759C7;
+    }
+    .focus\:border-custom-lilac-accent:focus {
+      border-color: #C759C7;
+    }
+
+    /* Sombra personalizada para un efecto más "lila" */
+    .shadow-custom-purple {
+      box-shadow: 0 15px 30px -8px rgba(199, 89, 199, 0.4), /* Ajustado a la nueva accent color */
+                  0 5px 15px -5px rgba(199, 89, 199, 0.15); /* Ajustado a la nueva accent color */
+    }
+
+    /* Estilos para el degradado de la sección Hero */
+    .hero-gradient-bg {
+      background: linear-gradient(to bottom right, #FCE4EC, #E0BBE4); /* Degradado suave y elegante */
+    }
+
+    /* Estilos para el modal/mensaje personalizado. */
+    .modal-overlay {
+        position: fixed; /* Fija el modal sobre el contenido. */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente. */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Asegura que el modal esté por encima de todos los demás elementos. */
+        opacity: 0; /* Inicialmente transparente. */
+        visibility: hidden; /* Inicialmente oculto a la interacción. */
+        transition: opacity 0.3s ease, visibility 0.3s ease; /* Transición suave para aparecer/desaparecer. */
+    }
+    .modal-overlay.visible {
+        opacity: 1; /* Hace el modal completamente visible. */
+        visibility: visible; /* Lo hace interactuable. */
+    }
+    .modal-content {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 0.75rem; /* Bordes redondeados. */
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Sombra para efecto flotante. */
+        text-align: center;
+        max-width: 90%;
+        width: 400px;
+        position: relative;
+        transform: translateY(-20px); /* Ligeramente desplazado hacia arriba al aparecer. */
+        transition: transform 0.3s ease; /* Animación de desplazamiento. */
+    }
+    .modal-overlay.visible .modal-content {
+        transform: translateY(0); /* Vuelve a su posición normal al hacerse visible. */
+    }
+    .close-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #666;
+    }
+    .close-button:hover {
+        color: #333;
+    }
+    .modal-content h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #22C55E; /* green-500 de Tailwind para un color de éxito. */
+    }
+    .modal-content p {
+        margin-bottom: 1.5rem;
+        color: #555;
+    }
+    .modal-content img { /* Estilo para la imagen dentro del modal */
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem; /* rounded-lg */
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Estilos para las imágenes dentro del área de descripción de servicio */
+    .service-description-area img {
+      object-fit: cover; /* Asegura que la imagen cubra el área manteniendo su relación de aspecto */
+      /* Removida la propiedad object-position global para permitir el control individual */
+    }
+
+    /* Estilo para hacer las tarjetas de servicio clickeables */
+    .service-card {
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadida transición para hover */
+    }
+    .service-card:hover {
+      transform: translateY(-8px); /* Efecto sutil al pasar el mouse, más pronunciado */
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+    }
+
+    /* Estilos para el botón "Volver Arriba" */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: #C759C7; /* Usando el nuevo lila de acento */
+      color: white;
+      border: none;
+      border-radius: 9999px; /* Completamente redondo */
+      padding: 1rem;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      opacity: 0; /* Inicialmente oculto */
+      visibility: hidden; /* Inicialmente oculto para interacción */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 900; /* Para que esté por encima de la mayoría de los elementos, pero debajo del modal */
+    }
+
+    #back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #back-to-top:hover {
+      background-color: #A845A8; /* Un lila más oscuro para hover */
+      transform: translateY(-2px); /* Pequeño efecto de levantamiento al pasar el mouse */
+    }
+
+    /* Estilos específicos para el modal cuando funciona como lightbox */
+    .lightbox-modal-content {
+      background-color: rgba(0, 0, 0, 0.85) !important; /* Fondo transparente oscuro */
+      box-shadow: none !important; /* Sin sombra */
+      padding: 0 !important; /* Sin padding */
+      max-width: 90vw !important; /* Ocupa más ancho de la ventana */
+      max-height: 90vh !important; /* Ocupa más alto de la ventana */
+      width: auto !important; /* Ancho automático */
+      height: auto !important; /* Alto automático */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox-modal-content img {
+      max-width: 100%;
+      max-height: 80vh; /* Para que la imagen no ocupe todo el alto y quepa el título */
+      object-fit: contain; /* Para que la imagen se ajuste sin recortarse */
+      border-radius: 0.5rem; /* rounded-lg */
+    }
+    .lightbox-modal-content .close-button {
+      color: white; /* Botón de cierre blanco para que se vea sobre la imagen oscura */
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .lightbox-modal-content .close-button:hover {
+      color: #ccc;
+    }
+    .lightbox-modal-content h3 {
+      color: white; /* Título blanco para que se vea sobre la imagen oscura */
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+      margin-bottom: 0.5rem;
+    }
+    /* Estilos para los botones de navegación de la lightbox */
+    .lightbox-nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 9999px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1010; /* Por encima de la imagen */
+      transition: background-color 0.2s ease;
+    }
+    .lightbox-nav-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .lightbox-nav-button.left { left: 1rem; }
+    .lightbox-nav-button.right { right: 1rem; }
+
+
+    /* Estilo para ocultar/mostrar el encabezado */
+    .header-hidden {
+      transform: translateY(-100%); /* Mueve el encabezado completamente hacia arriba */
+    }
+    header {
+      transition: transform 0.3s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out; /* Transición suave para el movimiento, el color y la sombra */
+      /* Efecto de cristal (blur) */
+      backdrop-filter: blur(0px); /* Inicialmente sin blur */
+      -webkit-backdrop-filter: blur(0px); /* Para compatibilidad con Safari */
+      background-color: rgba(255, 255, 255, 0); /* Fondo completamente transparente inicialmente */
+      box-shadow: none; /* Sin sombra inicialmente */
+    }
+
+    /* Estilos del encabezado cuando está fijo y se ha hecho scroll */
+    header.scrolled {
+      background-color: rgba(224, 190, 228, 0.7); /* Lila suave semi-transparente (E0BBE4 con 70% de opacidad) */
+      backdrop-filter: blur(10px); /* Efecto de desenfoque */
+      -webkit-backdrop-filter: blur(10px); /* Para compatibilidad con Safari */
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra sutil */
+    }
+
+    /* Animación para los enlaces de navegación */
+    #nav-menu a {
+      position: relative;
+      padding-bottom: 4px; /* Espacio para la línea */
+    }
+    #nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: #C759C7; /* Color de acento */
+      transition: width 0.3s ease-out;
+    }
+    #nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    /* Animaciones personalizadas */
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in-delayed {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Animación de pulso para el botón, más sutil y solo en hover */
+    @keyframes subtle-pulse-shadow {
+      0%, 100% { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+      50% { box-shadow: 0 12px 20px -4px rgba(0, 0, 0, 0.15), 0 5px 8px -2px rgba(0, 0, 0, 0.08); }
+    }
+    /* Animación para revelar secciones al hacer scroll */
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 1.2s ease-out both;
+    }
+    .animate-fade-in-delayed {
+      animation: fade-in-delayed 1.6s ease-out both;
+    }
+    .animate-pulse-shadow:hover { /* Apply only on hover */
+      animation: subtle-pulse-shadow 1s ease-in-out infinite;
+    }
+    .animate-on-scroll {
+      opacity: 0; /* Oculto por defecto */
+      transform: translateY(50px); /* Desplazado hacia abajo por defecto */
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .animate-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Estilos específicos para la galería */
+    .slideshow-image {
+      transition: opacity 0.5s ease-in-out; /* Transición suave para las imágenes del carrusel */
+    }
+
+    /* Estilos para mensajes de error del formulario */
+    .error-message {
+      color: #EF4444; /* red-500 de Tailwind */
+      font-size: 0.875rem; /* text-sm */
+      margin-top: 0.25rem; /* mt-1 */
+      display: none; /* Oculto por defecto */
+    }
+    .error-message.active {
+      display: block; /* Visible cuando está activo */
+    }
+    
+    /* --- Estilos para el Menú Deslizante Lateral (Off-Canvas) --- */
+    .off-canvas-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px; /* Ancho del menú */
+      max-width: 80vw; /* Máximo 80% del ancho de la vista */
+      height: 100%;
+      background-color: white; /* Fondo del menú */
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+      transform: translateX(-100%); /* Oculto por defecto */
+      /* Añadido para asegurar que el menú esté completamente oculto cuando no está abierto */
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      z-index: 999; /* Por encima de todo, pero debajo de los modales */
+      display: flex;
+      flex-direction: column;
+      padding-top: 4rem; /* Espacio para el encabezado si es necesario */
+    }
+
+    .off-canvas-menu.open {
+      transform: translateX(0); /* Visible */
+      opacity: 1; /* Completamente visible */
+      visibility: visible; /* Habilitar interacción */
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      z-index: 998; /* Por debajo del menú */
+    }
+
+    .menu-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Evitar scroll en el body cuando el menú está abierto */
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    /* Estilos para los enlaces dentro del menú off-canvas */
+    .off-canvas-menu a {
+      padding: 1rem 1.5rem;
+      color: #4A4A4A; /* Color de texto principal */
+      font-weight: 600;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      display: block; /* Para que cada enlace ocupe su propia línea y sea clickeable */
+      text-align: left;
+    }
+
+    .off-canvas-menu a:hover {
+      background-color: #F0F0F0;
+      color: #6A407A; /* Lila oscuro */
+    }
+
+    /* Ocultar el menú off-canvas en pantallas grandes */
+    @media (min-width: 1024px) { /* lg breakpoint de Tailwind */
+      .off-canvas-menu, .menu-overlay {
+        display: none !important;
+      }
+      /* Asegurarse de que el menú de escritorio sea visible */
+      #nav-menu.lg\:flex {
+        display: flex !important;
+      }
+      /* Asegurarse de que el botón de hamburguesa esté oculto en desktop */
+      #menu-toggle.lg\:hidden {
+        display: none !important;
+      }
+    }
+
+    /* --- Estilos para el nuevo botón de hamburguesa animado --- */
+    .hamburger-icon {
+      width: 30px;
+      height: 20px;
+      position: relative;
+      transform: rotate(0deg);
+      transition: .3s ease-in-out;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hamburger-icon span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #6A407A; /* Color de las líneas de la hamburguesa */
+      border-radius: 9px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+    }
+
+    .hamburger-icon span:nth-child(1) {
+      top: 0px;
+    }
+
+    .hamburger-icon span:nth-child(2) {
+      top: 8px;
+    }
+
+    .hamburger-icon span:nth-child(3) {
+      top: 16px;
+    }
+
+    .hamburger-icon.open span:nth-child(1) {
+      top: 8px;
+      transform: rotate(135deg);
+    }
+
+    .hamburger-icon.open span:nth-child(2) {
+      opacity: 0;
+      left: -60px;
+    }
+
+    .hamburger-icon.open span:nth-child(3) {
+      top: 8px;
+      transform: rotate(-135deg);
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Sección de Encabezado (Header) - Contiene solo la navegación principal -->
+  <header class="fixed top-0 w-full z-50 bg-white shadow-md transition-all duration-300 ease-out">
+    <nav class="container mx-auto flex items-center justify-center p-4 relative">
+      <!-- Botón de menú para dispositivos móviles (hamburguesa). -->
+      <button id="menu-toggle" class="z-50 block lg:hidden text-custom-lilac-dark text-3xl absolute left-4 p-2 rounded-md hover:bg-gray-100 transition" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="off-canvas-menu">
+        <!-- Nuevo icono de hamburguesa animado con CSS -->
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+
+      <!-- Menú de navegación principal para desktop. -->
+      <div id="nav-menu" class="hidden lg:flex lg:items-center lg:space-x-8" role="navigation">
+        <a href="#inicio" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Inicio</a>
+        <a href="#servicios" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Servicios</a>
+        <a href="#galeria" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Galería</a>
+        <a href="#contacto" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Contacto</a>
+        <a href="#formulario" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Reservar</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Menú Deslizante Lateral (Off-Canvas Menu) -->
+  <div id="off-canvas-menu" class="off-canvas-menu">
+    <button id="close-menu-button" class="absolute top-4 right-4 text-custom-lilac-dark text-3xl p-2 rounded-md hover:bg-gray-100 transition" aria-label="Cerrar menú de navegación">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="#inicio" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Inicio</a>
+    <a href="#servicios" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Servicios</a>
+    <a href="#galeria" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Galería</a>
+    <a href="#contacto" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Contacto</a>
+    <a href="#formulario" class="py-2 text-black hover:text-custom-lilac-accent transition duration-300">Reservar</a>
+  </div>
+
+  <!-- Overlay para el menú off-canvas -->
+  <div id="menu-overlay" class="menu-overlay"></div>
+
+  <!-- Sección de Inicio (Hero Section) - La primera impresión de la página con logo y título principal -->
+  <section id="inicio" class="hero-gradient-bg text-center p-8 sm:p-16 min-h-[70vh] flex flex-col items-center justify-center">
+    <div class="max-w-4xl mx-auto pt-8"> <!-- Ajustado padding-top para reducir espacio -->
+      <!-- Logo -->
+      <img src="https://i.imgur.com/gFlexle.png" alt="Logo de Espléndida Manicuría" class="h-64 md:h-96 sm:h-80 mx-auto mb-4 object-contain animate-fade-in" />
+      <!-- Frase "Tu esencia, tu estilo..." con la fuente Great Vibes (restaurada) y grosor ajustado -->
+      <h1 class="text-3xl sm:text-4xl text-black mb-4 leading-tight drop-shadow-lg animate-fade-in" style="font-family: 'Great Vibes', cursive; font-weight: 700;">
+        Tu esencia, tu estilo...
+      </h1>
+      <!-- Nueva Introducción -->
+      <p class="text-lg sm:text-xl text-black mb-10 max-w-2xl mx-auto animate-fade-in-delayed">
+        ¡Hola! Soy Noelia, y en Espléndida Manicuría te espero para transformar tus manos y pies. Aquí vas a encontrar la mejor calidad y una atención personalizada. ¡Ven a descubrir un espacio donde la belleza y el bienestar se unen para vos!
+      </p>
+      <!-- Botón de reserva con efecto de sombra mejorado -->
+      <a href="#formulario" class="bg-custom-lilac-accent hover:bg-custom-lilac-dark-hover text-white font-bold py-3 px-8 rounded-full shadow-lg transition hover:scale-105 transform inline-block animate-fade-in-delayed animate-pulse-shadow">Reservar Turno</a>
+    </div>
+  </section>
+
+  <!-- Sección de Servicios - Detalla las opciones que ofrece el negocio -->
+  <section id="servicios" class="container mx-auto py-16 px-4 sm:px-8 animate-on-scroll">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-custom-lilac-dark mb-12 relative pb-4">
+      Nuestros Servicios
+      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-custom-lilac-accent to-purple-400 rounded-full"></span>
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Tarjeta de Servicio: Esmaltado Semipermanente en Manos -->
+      <div class="bg-white rounded-xl shadow-custom-purple p-6 flex flex-col items-center text-center border border-gray-200 service-card transition duration-300 hover:shadow-xl">
+        <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Esmaltado Semipermanente en Manos</h3>
+        <p class="text-gray-600 mb-4 text-sm">Color vibrante y duradero por semanas.</p>
+        <div class="relative w-full">
+          <!-- Aplicado flex-col sm:flex-row para mejor responsividad -->
+          <div class="service-description-area flex flex-col sm:flex-row items-center w-full">
+            <p class="text-black text-sm overflow-hidden transition-all duration-500 ease-in-out max-h-16 flex-grow" id="desc-semipermanente-manos">
+              Disfruta de uñas perfectas y brillantes hasta por 3 semanas. Utilizamos productos de alta calidad que protegen y fortalecen tus uñas naturales, ofreciendo un acabado impecable y de larga duración sin descascarillarse. Ideal para mantener tus manos siempre listas y hermosas.
+            </p>
+            <!-- Lazy loading añadido -->
+            <img id="img-semipermanente-manos-expanded" class="hidden w-32 h-36 lg:h-40 object-cover rounded-lg ml-4 flex-shrink-0 opacity-0 transition-opacity duration-300" alt="Ejemplo de Esmaltado Semipermanente en Manos" loading="lazy">
+          </div>
+          <button class="text-custom-lilac-accent text-sm mt-2 focus:outline-none flex items-center justify-center mx-auto" onclick="event.stopPropagation(); toggleDescription('desc-semipermanente-manos', 'img-semipermanente-manos-expanded', this, 'Esmaltado Semipermanente en Manos')" aria-expanded="false" aria-controls="desc-semipermanente-manos">
+            Leer más <i class="fas fa-chevron-down ml-2 text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Servicio: Esmaltado Semipermanente en Pies -->
+      <div class="bg-white rounded-xl shadow-custom-purple p-6 flex flex-col items-center text-center border border-gray-200 service-card transition duration-300 hover:shadow-xl">
+        <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Esmaltado Semipermanente en Pies</h3>
+        <p class="text-gray-600 mb-4 text-sm">Belleza duradera para tus pies.</p>
+        <div class="relative w-full">
+          <!-- Aplicado flex-col sm:flex-row para mejor responsividad -->
+          <div class="service-description-area flex flex-col sm:flex-row items-center w-full">
+            <p class="text-black text-sm overflow-hidden transition-all duration-500 ease-in-out max-h-16 flex-grow" id="desc-semipermanente-pies">
+              Consiente tus pies con un esmaltado que resiste el día a día y te mantiene impecable por semanas. Ideal para sandalias y cualquier calzado abierto, garantizando pies siempre presentables y con un color vibrante.
+            </p>
+            <!-- IMAGEN DE PIES PROPORCIONADA POR EL USUARIO - Lazy loading añadido -->
+            <img id="img-semipermanente-pies-expanded" class="hidden w-32 h-36 lg:h-40 object-cover rounded-lg ml-4 flex-shrink-0 opacity-0 transition-opacity duration-300" alt="Ejemplo de Esmaltado Semipermanente en Pies" loading="lazy">
+          </div>
+          <button class="text-custom-lilac-accent text-sm mt-2 focus:outline-none flex items-center justify-center mx-auto" onclick="event.stopPropagation(); toggleDescription('desc-semipermanente-pies', 'img-semipermanente-pies-expanded', this, 'Esmaltado Semipermanente en Pies')" aria-expanded="false" aria-controls="desc-semipermanente-pies">
+            Leer más <i class="fas fa-chevron-down ml-2 text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Servicio: Capping Gel -->
+      <div class="bg-white rounded-xl shadow-custom-purple p-6 flex flex-col items-center text-center border border-gray-200 service-card transition duration-300 hover:shadow-xl">
+        <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Capping Gel</h3>
+        <p class="text-gray-600 mb-4 text-sm">Fortaleza extra para uñas frágiles.</p>
+        <div class="relative w-full">
+          <div class="service-description-area flex flex-col sm:flex-row items-center w-full">
+            <p class="text-black text-sm overflow-hidden transition-all duration-500 ease-in-out max-h-16 flex-grow" id="desc-capping">
+              Un refuerzo de gel que protege y engrosa tus uñas naturales, evitando quiebres y descascarillados. Es ideal para uñas débiles o quebradizas, proporcionando una base sólida para tu esmaltado semipermanente o un acabado natural y resistente. Tus uñas crecerán más fuertes y más sanas.
+            </p>
+            <!-- Lazy loading añadido -->
+            <img id="img-capping-expanded" class="hidden w-32 h-36 lg:h-40 object-cover rounded-lg ml-4 flex-shrink-0 opacity-0 transition-opacity duration-300" alt="Ejemplo de Capping Gel" loading="lazy">
+          </div>
+          <button class="text-custom-lilac-accent text-sm mt-2 focus:outline-none flex items-center justify-center mx-auto" onclick="event.stopPropagation(); toggleDescription('desc-capping', 'img-capping-expanded', this, 'Capping Gel')" aria-expanded="false" aria-controls="desc-capping">
+            Leer más <i class="fas fa-chevron-down ml-2 text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Servicio: Extensión Soft Gel -->
+      <div class="bg-white rounded-xl shadow-custom-purple p-6 flex flex-col items-center text-center border border-gray-200 service-card transition duration-300 hover:shadow-xl">
+        <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Extensión Soft Gel</h3>
+        <p class="text-gray-600 mb-4 text-sm">Longitud y forma al instante.</p>
+        <div class="relative w-full">
+          <div class="service-description-area flex flex-col sm:flex-row items-center w-full">
+            <p class="text-black text-sm overflow-hidden transition-all duration-500 ease-in-out max-h-16 flex-grow" id="desc-softgel">
+              Logra la longitud y forma que siempre soñaste en poco tiempo. Las extensiones de soft gel son ligeras, flexibles y se adhieren perfectamente a tu uña natural, creando un resultado de apariencia muy natural y duradera. ¡Cambia tu look al instante!
+            </p>
+            <!-- Lazy loading añadido -->
+            <img id="img-softgel-expanded" class="hidden w-32 h-36 lg:h-40 object-cover rounded-lg ml-4 flex-shrink-0 opacity-0 transition-opacity duration-300" alt="Ejemplo de Extensión Soft Gel" loading="lazy">
+          </div>
+          <button class="text-custom-lilac-accent text-sm mt-2 focus:outline-none flex items-center justify-center mx-auto" onclick="event.stopPropagation(); toggleDescription('desc-softgel', 'img-softgel-expanded', this, 'Extensión Soft Gel')" aria-expanded="false" aria-controls="desc-softgel">
+            Leer más <i class="fas fa-chevron-down ml-2 text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Servicio: Nail Art -->
+      <div class="bg-white rounded-xl shadow-custom-purple p-6 flex flex-col items-center text-center border border-gray-200 service-card transition duration-300 hover:shadow-xl">
+        <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Nail Art</h3>
+        <p class="text-gray-600 mb-4 text-sm">Diseños únicos para tus uñas.</p>
+        <div class="relative w-full">
+          <div class="service-description-area flex flex-col sm:flex-row items-center w-full">
+            <p class="text-black text-sm overflow-hidden transition-all duration-500 ease-in-out max-h-16 flex-grow" id="desc-nailart">
+              Deja volar tu imaginación con diseños personalizados. Desde estilos sutiles y elegantes hasta creaciones audaces y coloridas, transformamos tus uñas en pequeñas obras de arte. Consulta las últimas tendencias o trae tu propia idea para un look exclusivo.
+            </p>
+            <!-- Lazy loading añadido -->
+            <img id="img-nailart-expanded" class="hidden w-32 h-36 lg:h-40 object-cover rounded-lg ml-4 flex-shrink-0 opacity-0 transition-opacity duration-300" alt="Ejemplo de Nail Art" loading="lazy">
+          </div>
+          <button class="text-custom-lilac-accent text-sm mt-2 focus:outline-none flex items-center justify-center mx-auto" onclick="event.stopPropagation(); toggleDescription('desc-nailart', 'img-nailart-expanded', this, 'Nail Art')" aria-expanded="false" aria-controls="desc-nailart">
+            Leer más <i class="fas fa-chevron-down ml-2 text-base"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Galería (Carrusel y Cuadrícula de imágenes) -->
+  <section id="galeria" class="container mx-auto py-16 px-4 sm:px-8 pb-0 animate-on-scroll">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-custom-lilac-dark mb-12 relative pb-4">
+      Nuestra Galería
+      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-custom-lilac-accent to-purple-400 rounded-full"></span>
+    </h2>
+
+    <!-- Carrusel de imágenes -->
+    <div id="slideshow-container" class="relative w-full max-w-3xl mx-auto rounded-lg shadow-xl overflow-hidden mb-8 bg-gray-100 flex items-center justify-center min-h-[280px] md:min-h-[340px] lg:min-h-[380px]">
+      <!-- La imagen del slideshow no lleva lazy loading porque siempre es la primera visible -->
+      <img id="slideshow-image" src="" alt="Galería de Espléndida Manicuría" class="slideshow-image w-full h-full object-contain">
+      <button onclick="prevSlide()" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full ml-2 hover:bg-opacity-75 transition z-10" aria-label="Imagen anterior">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button onclick="nextSlide()" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full mr-2 hover:bg-opacity-75 transition z-10" aria-label="Imagen siguiente">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Botón para alternar entre carrusel y cuadrícula -->
+    <div class="text-center mb-8">
+      <button id="toggle-gallery-view-button" onclick="toggleGalleryView()" class="bg-custom-lilac-accent hover:bg-custom-lilac-dark-hover text-white font-bold py-3 px-8 rounded-full shadow-lg transition hover:scale-105 transform inline-block">
+        Ver todas las fotos
+      </button>
+    </div>
+
+    <!-- Cuadrícula de imágenes (inicialmente oculta) -->
+    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 hidden">
+      <!-- Las miniaturas de las imágenes se cargarán aquí dinámicamente con lazy loading -->
+    </div>
+  </section>
+
+  <!-- Sección de Contacto - Información para localizar y contactar el negocio -->
+  <section id="contacto" class="container mx-auto px-4 sm:px-8 bg-white rounded-xl shadow-lg border border-gray-200 pt-0 mt-0 pb-8 animate-on-scroll">
+    <div class="md:flex md:space-x-12 items-start">
+      <div class="md:w-1/2">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-custom-lilac-dark mb-8">Contacto</h2>
+        <p class="text-black mb-4">
+          <span class="font-semibold">WhatsApp:</span>
+          <a href="https://wa.me/5493493521676" target="_blank" rel="noopener noreferrer" class="text-custom-lilac-accent font-semibold hover:underline flex items-center">
+            <i class="fab fa-whatsapp mr-2 text-2xl" aria-hidden="true"></i> 3493 521676
+          </a>
+        </p>
+        <p class="text-black mb-4">
+          <span class="font-semibold">Instagram:</span>
+          <a href="https://www.instagram.com/esplendida.manicuria" target="_blank" rel="noopener noreferrer" class="text-custom-lilac-accent font-semibold hover:underline flex items-center">
+            <i class="fab fa-instagram mr-2" aria-hidden="true"></i> @esplendida.manicuria
+          </a>
+        </p>
+        <p class="text-black mb-4"><span class="font-semibold">Dirección:</span> Azurduy 54, Sunchales, Santa Fe</p>
+        <p class="text-black mb-6"><span class="font-semibold">Horarios:</span><br>Lunes a viernes desde las 15:00 hs<br>Sábados hasta el mediodía</p>
+      </div>
+      <div class="md:w-1/2 mt-12 md:mt-0">
+        <!-- Mapa de Google Maps incrustado. Utiliza un iframe para mostrar la ubicación. URL corregida. -->
+        <div id="map" class="w-full h-64 rounded-xl shadow-md border-2 border-gray-200 overflow-hidden">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3408.069418652037!2d-61.57945082361732!3d-31.42858808139589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95ca313936a282f1%3A0xc3f5b7d9f7e8a9f!2sAzurduy%2054%2C%20Sunchales%2C%20Santa%20Fe!5e0!3m2!1ses-419!2sar!4v1719600000000!5m2!1ses-419!2sar"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de Espléndida Manicuría en Google Maps">
+          </iframe>
+        </div>
+        <!-- Botón para ver la ubicación en Google Maps directamente. URL corregida. -->
+        <a href="https://www.google.com/maps/place/Azurduy+54,+Sunchales,+Santa+Fe/@-31.428588,-61.5794508,17z/data=!3m1!4b1!4m6!3m5!1s0x95ca313936a282f1:0xc3f5b7d9f7e8a9f!8m2!3d-31.428588!4d-61.5794508!16s%2Fg%2F11c210g993?entry=ttu" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition hover:scale-105 transform">📍 Ver en Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Formulario de Reserva - Permite a los clientes solicitar un turno -->
+  <section id="formulario" class="container mx-auto py-16 px-4 sm:px-8 animate-on-scroll">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-custom-lilac-dark mb-12 relative pb-4">
+      Reservar Turno Online
+      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-custom-lilac-accent to-purple-400 rounded-full"></span>
+    </h2>
+    <form onsubmit="enviarTurno(event)" class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg grid gap-6 sm:grid-cols-2 border border-gray-200">
+      <div class="sm:col-span-2">
+        <label for="nombre" class="block text-black mb-2 font-medium">Nombre completo:</label>
+        <input type="text" id="nombre" autocomplete="name" name="nombre" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-custom-lilac-accent focus:border-custom-lilac-accent transition duration-200" placeholder="Ej: María Gómez" required aria-required="true">
+        <span id="error-nombre" class="error-message"></span>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="servicio" class="block text-black mb-2 font-medium">Servicio:</label>
+        <select id="servicio" autocomplete="off" name="servicio" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-custom-lilac-accent focus:border-custom-lilac-accent transition duration-200 bg-white" required aria-required="true">
+          <option value="">-- Elige un servicio --</option>
+          <option value="Esmaltado Semipermanente en Manos">Esmaltado Semipermanente en Manos</option>
+          <option value="Esmaltado Semipermanente en Pies">Esmaltado Semipermanente en Pies</option>
+          <option value="Capping Gel">Capping Gel</option>
+          <option value="Extensión Soft Gel">Extensión Soft Gel</option>
+          <option value="Nail Art">Nail Art</option>
+        </select>
+        <span id="error-servicio" class="error-message"></span>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="fechaHora" class="block text-black mb-2 font-medium">Fecha y hora preferida:</label>
+        <input type="datetime-local" id="fechaHora" autocomplete="off" name="fechaHora" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-custom-lilac-accent focus:border-custom-lilac-accent transition duration-200">
+        <span id="error-fechaHora" class="error-message"></span>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="comentario" class="block text-black mb-2 font-medium">Comentarios (opcional):</label>
+        <textarea id="comentario" autocomplete="comment" name="comentario" rows="4" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-custom-lilac-accent focus:border-custom-lilac-accent transition duration-200" placeholder="¿Algo especial que deseas o alguna preferencia de horario?"></textarea>
+      </div>
+      <!-- Nuevo campo para el medio de pago -->
+      <div class="sm:col-span-2">
+        <label for="medioPago" class="block text-black mb-2 font-medium">Medio de Pago Preferido:</label>
+        <select id="medioPago" autocomplete="off" name="medioPago" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-custom-lilac-accent focus:border-custom-lilac-accent transition duration-200 bg-white" required aria-required="true">
+          <option value="">-- Elige un medio de pago --</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+        </select>
+        <span id="error-medioPago" class="error-message"></span>
+      </div>
+      <button type="submit" id="submit-button" class="sm:col-span-2 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-full shadow-md hover:shadow-lg transition transform hover:scale-105">Enviar solicitud por WhatsApp</button>
+    </form>
+  </section>
+
+  <!-- Sección de Política de Privacidad (Nueva Sección) -->
+  <section id="privacidad" class="container mx-auto py-16 px-4 sm:px-8 bg-white rounded-xl shadow-lg border border-gray-200 animate-on-scroll">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-custom-lilac-dark mb-12 relative pb-4">
+      Política de Privacidad
+      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-custom-lilac-accent to-purple-400 rounded-full"></span>
+    </h2>
+    <div class="prose max-w-none text-black">
+      <p class="mb-4">En Espléndida Manicuría, nos comprometemos a proteger la privacidad de nuestras clientas. Esta política describe cómo recopilamos, usamos y protegemos su información personal.</p>
+      <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Recopilación de Información</h3>
+      <p class="mb-4">Recopilamos información que usted nos proporciona directamente al usar nuestro formulario de reserva, como su nombre, servicio deseado, fecha y hora preferida, y comentarios. También recopilamos su medio de pago preferido para fines de coordinación.</p>
+      <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Uso de la Información</h3>
+      <p class="mb-4">La información recopilada se utiliza exclusivamente para gestionar sus reservas y comunicarnos con usted a través de WhatsApp. No compartimos su información personal con terceros para fines de marketing. Su número de teléfono de WhatsApp se utiliza únicamente para el envío de la solicitud de turno.</p>
+      <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Seguridad de Datos</h3>
+      <p class="mb-4">Tomamos medidas razonables para proteger la información personal que recopilamos de pérdidas, robos, uso indebido y acceso no autorizado, divulgación, alteración y destrucción.</p>
+      <h3 class="text-xl font-semibold text-custom-lilac-dark mb-2">Cambios a esta Política</h3>
+      <p>Podemos actualizar nuestra Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página. Se le aconseja revisar esta Política de Privacidad periódicamente para cualquier cambio.</p>
+    </div>
+  </section>
+
+  <!-- Pie de página (Footer) - Información de copyright y enlaces a redes sociales -->
+  <footer class="bg-custom-lilac-dark text-white py-8 text-center px-4 sm:px-8">
+    <p class="text-lg">&copy; 2025 Espléndida Manicuría - Noelia Bazán</p>
+    <p class="mt-2 text-sm text-purple-200">Azurduy 54, Sunchales, Santa Fe</p>
+    <div class="flex justify-center space-x-6 mt-4">
+      <a href="https://www.instagram.com/esplendida.manicuria" target="_blank" rel="noopener noreferrer" class="text-white hover:text-custom-lilac-accent transition duration-300 text-2xl flex items-center">
+        <i class="fab fa-instagram mr-2" aria-hidden="true"></i> Instagram
+      </a>
+      <!-- Enlace de Facebook actualizado a un placeholder genérico. -->
+      <a href="https://www.facebook.com/EsplendidaManicuria" target="_blank" rel="noopener noreferrer" class="text-white hover:text-custom-lilac-accent transition duration-300 text-2xl flex items-center">
+        <i class="fab fa-facebook-f mr-2" aria-hidden="true"></i> Facebook
+      </a>
+      <a href="#privacidad" class="text-white hover:text-custom-lilac-accent transition duration-300 text-lg flex items-center">
+        Política de Privacidad
+      </a>
+    </div>
+  </footer>
+
+  <!-- Contenedor para el modal/mensaje personalizado. Inicialmente oculto. -->
+  <div id="custom-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-message">
+    <div class="modal-content">
+      <button class="close-button" onclick="closeModal()" aria-label="Cerrar ventana emergente">×</button>
+      <h3 id="modal-title"></h3>
+      <div id="modal-body-content"></div> <!-- Contenedor flexible para texto o imagen -->
+      <button onclick="closeModal()" class="bg-custom-lilac-accent hover:bg-custom-lilac-dark-hover text-white font-bold py-2 px-6 rounded-full transition">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Botón Volver Arriba -->
+  <button id="back-to-top" aria-label="Volver arriba">↑</button>
+
+  <!-- Scripts JavaScript interactivos para la página -->
+  <script>
+    // --- Lógica de la Galería de Imágenes (Lightbox) ---
+    // Total de imágenes en la galería: 34
+    const galleryImages = [
+      // 15 imágenes originales del archivo webcasilista.txt
+      { src: 'https://i.imgur.com/DV1NadT.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/l2jFFMq.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/Pk5krtJ.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/C77FmGA.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/WhM3Z9p.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/8N0Gpv7.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/LMkHvS2.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/bylc8n2.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/tSzXblK.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/abc6qaZ.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/5Q7Y2mU.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/UcqirOW.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/A6eLQUA.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/3b4cIgc.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/mnswm2v.jpeg', objectPosition: 'center' },
+      // 11 imágenes añadidas en una interacción anterior
+      { src: 'https://i.imgur.com/toxA1AP.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/BKk2HId.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/lS6ZPmu.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/2njRqMe.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/VrQ7tKQ.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/3qWn7UI.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/Eve7ZO4.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/ATj9ikP.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/SSBE3wl.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/pZtO2ea.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/IzlWZQy.jpeg', objectPosition: 'center' },
+      // 8 imágenes añadidas en la última solicitud del usuario
+      { src: 'https://i.imgur.com/Yg2mz1g.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/WUAjpHs.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/pqcBupm.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/cZvGdxn.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/OWEYIrT.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/eQOn8OA.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/qwj2P2E.jpeg', objectPosition: 'center' },
+      { src: 'https://i.imgur.com/gNPyy6u.jpeg', objectPosition: 'center' }
+    ];
+    let currentSlideIndex = 0;
+    let slideshowInterval;
+    const slideshowImage = document.getElementById('slideshow-image');
+    const galleryGrid = document.getElementById('gallery-grid');
+    const slideshowContainer = document.getElementById('slideshow-container');
+    const toggleViewButton = document.getElementById('toggle-gallery-view-button');
+
+    /**
+     * Muestra una imagen específica en el carrusel.
+     * @param {number} index - El índice de la imagen a mostrar.
+     */
+    function showSlide(index) {
+      if (index >= galleryImages.length) {
+        currentSlideIndex = 0;
+      } else if (index < 0) {
+        currentSlideIndex = galleryImages.length - 1;
+      } else {
+        currentSlideIndex = index;
+      }
+      slideshowImage.src = galleryImages[currentSlideIndex].src;
+      slideshowImage.style.objectPosition = galleryImages[currentSlideIndex].objectPosition;
+    }
+
+    /**
+     * Avanza a la siguiente imagen en el carrusel.
+     */
+    function nextSlide() {
+      stopAutoSlideshow(); // Detener el carrusel automático al navegar manualmente
+      showSlide(currentSlideIndex + 1);
+      startAutoSlideshow(); // Reiniciar el carrusel automático
+    }
+
+    /**
+     * Retrocede a la imagen anterior en el carrusel.
+     */
+    function prevSlide() {
+      stopAutoSlideshow(); // Detener el carrusel automático al navegar manualmente
+      showSlide(currentSlideIndex - 1);
+      startAutoSlideshow(); // Reiniciar el carrusel automático
+    }
+
+    /**
+     * Inicia el carrusel automático.
+     */
+    function startAutoSlideshow() {
+      stopAutoSlideshow(); // Asegurarse de que no haya múltiples intervalos
+      slideshowInterval = setInterval(() => {
+        showSlide(currentSlideIndex + 1);
+      }, 3000); // Cambia de imagen cada 3 segundos
+    }
+
+    /**
+     * Detiene el carrusel automático.
+     */
+    function stopAutoSlideshow() {
+      clearInterval(slideshowInterval);
+    }
+
+    /**
+     * Alterna entre la vista de carrusel y la vista de cuadrícula.
+     */
+    function toggleGalleryView() {
+      if (galleryGrid.classList.contains('hidden')) {
+        // Mostrar cuadrícula, ocultar carrusel
+        galleryGrid.classList.remove('hidden');
+        slideshowContainer.classList.add('hidden');
+        toggleViewButton.textContent = 'Volver al carrusel';
+        stopAutoSlideshow(); // Detener el carrusel cuando se ve la cuadrícula
+      } else {
+        // Mostrar carrusel, ocultar cuadrícula
+        galleryGrid.classList.add('hidden');
+        slideshowContainer.classList.remove('hidden');
+        toggleViewButton.textContent = 'Ver todas las fotos';
+        startAutoSlideshow(); // Reanudar el carrusel al volver
+      }
+    }
+
+    /**
+     * Muestra una imagen de la galería en un modal tipo lightbox.
+     * @param {number} index - El índice de la imagen a mostrar en la lightbox.
+     */
+    function showLightbox(index) {
+      if (index < 0 || index >= galleryImages.length) {
+        return;
+      }
+      currentSlideIndex = index; // Actualiza el índice global para la navegación
+
+      const image = galleryImages[currentSlideIndex];
+      const imageHtml = `
+        <img src="${image.src}" alt="Trabajo de manicura ${currentSlideIndex + 1}" class="mx-auto block" style="object-position: ${image.objectPosition};">
+        <button class="lightbox-nav-button left" onclick="navigateLightbox(-1)" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-nav-button right" onclick="navigateLightbox(1)" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
+      `;
+      showModal(`Imagen ${currentSlideIndex + 1} de ${galleryImages.length}`, imageHtml, true); // Pasar true para modo lightbox
+    }
+
+    /**
+     * Navega a la siguiente o anterior imagen en la lightbox.
+     * @param {number} direction - 1 para siguiente, -1 para anterior.
+     */
+    function navigateLightbox(direction) {
+      let newIndex = currentSlideIndex + direction;
+      if (newIndex >= galleryImages.length) {
+        newIndex = 0; // Vuelve al inicio si llega al final
+      } else if (newIndex < 0) {
+        newIndex = galleryImages.length - 1; // Va al final si retrocede desde el inicio
+      }
+      showLightbox(newIndex);
+    }
+
+    /**
+     * Genera dinámicamente las miniaturas de la galería en la cuadrícula.
+     */
+    function loadGalleryThumbnails() {
+      galleryGrid.innerHTML = ''; // Limpiar cualquier contenido existente
+      galleryImages.forEach((image, index) => {
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'relative group cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105';
+        imgDiv.innerHTML = `
+          <img src="${image.src}" alt="Trabajo de manicura ${index + 1}" class="w-full h-36 lg:h-40 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110" style="object-position: ${image.objectPosition};" loading="lazy">
+          <div class="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span class="text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🔍</span>
+          </div>
+        `;
+        imgDiv.onclick = () => {
+          showLightbox(index); // Abre la imagen en la lightbox al hacer clic
+        };
+        galleryGrid.appendChild(imgDiv);
+      });
+    }
+
+    // --- Lógica para el Menú Deslizante Lateral (Off-Canvas) ---
+    const menuToggle = document.getElementById('menu-toggle');
+    const offCanvasMenu = document.getElementById('off-canvas-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const closeMenuButton = document.getElementById('close-menu-button');
+    const hamburgerIcon = document.querySelector('.hamburger-icon'); // Seleccionar el nuevo icono
+
+    function openMenu() {
+      offCanvasMenu.classList.add('open');
+      menuOverlay.classList.add('visible');
+      document.body.classList.add('no-scroll'); // Evita el scroll en el body
+      menuToggle.setAttribute('aria-expanded', 'true');
+      hamburgerIcon.classList.add('open'); // Añadir clase para animar el icono
+    }
+
+    function closeMenu() {
+      offCanvasMenu.classList.remove('open');
+      menuOverlay.classList.remove('visible');
+      document.body.classList.remove('no-scroll'); // Habilita el scroll en el body
+      menuToggle.setAttribute('aria-expanded', 'false');
+      hamburgerIcon.classList.remove('open'); // Quitar clase para desanimar el icono
+    }
+
+    menuToggle.addEventListener('click', openMenu);
+    closeMenuButton.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu); // Cierra el menú al hacer clic en el overlay
+
+    // Cierra el menú off-canvas al hacer clic en un enlace
+    offCanvasMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // --- Lógica para el encabezado flotante (sticky header) ---
+    const header = document.querySelector('header');
+    let lastScrollY = window.scrollY; // Guarda la última posición de scroll
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > header.offsetHeight + 50 && window.scrollY > lastScrollY) {
+        // Si el scroll baja y pasa la altura del header + un margen, oculta el header
+        header.classList.add('header-hidden');
+      } else if (window.scrollY < lastScrollY || window.scrollY < 50) {
+        // Si el scroll sube o está cerca de la parte superior, muestra el header
+        header.classList.remove('header-hidden');
+      }
+
+      // Añadir/quitar clase 'scrolled' para el efecto de blur y sombra
+      if (window.scrollY > 0) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      lastScrollY = window.scrollY; // Actualiza la última posición de scroll
+    });
+
+    // --- Lógica para ajustar el padding-top del body para evitar que el header lo cubra ---
+    function adjustBodyPadding() {
+      const headerHeight = header.offsetHeight;
+      document.body.style.paddingTop = `${headerHeight}px`;
+    }
+
+    // Llama a la función al cargar la página y al redimensionar la ventana
+    window.addEventListener('DOMContentLoaded', adjustBodyPadding);
+    window.addEventListener('resize', adjustBodyPadding);
+
+    // --- Lógica para Expandir/Contraer la Descripción de Servicios y Mostrar Imagen "al lado" ---
+    /**
+     * Alterna la visibilidad completa de un párrafo de descripción de servicio
+     * y muestra/oculta una imagen relacionada "al lado".
+     * @param {string} textId - El ID del elemento de párrafo de la descripción.
+     * @param {string} imageId - El ID del elemento de imagen para mostrar/ocultar.
+     * @param {HTMLElement} button - El botón "Leer más/menos" que activó la función.
+     * @param {string} serviceName - El nombre del servicio para obtener la URL de la imagen.
+     */
+    function toggleDescription(textId, imageId, button, serviceName) {
+      const descriptionElement = document.getElementById(textId);
+      const imageElement = document.getElementById(imageId);
+      const buttonIcon = button.querySelector('i');
+
+      if (descriptionElement.classList.contains('max-h-16')) {
+        // Expandir
+        descriptionElement.classList.remove('max-h-16');
+        descriptionElement.classList.add('max-h-full');
+        button.innerHTML = `Leer menos <i class="fas fa-chevron-up ml-2 text-base"></i>`; // Cambiar ícono
+        button.setAttribute('aria-expanded', 'true');
+
+        if (imageElement && serviceExampleImages[serviceName]) {
+          imageElement.src = serviceExampleImages[serviceName];
+          imageElement.classList.remove('hidden');
+          imageElement.classList.add('opacity-100'); // Hacer visible con transición
+        }
+      } else {
+        // Contraer
+        descriptionElement.classList.remove('max-h-full');
+        descriptionElement.classList.add('max-h-16');
+        button.innerHTML = `Leer más <i class="fas fa-chevron-down ml-2 text-base"></i>`; // Cambiar ícono
+        button.setAttribute('aria-expanded', 'false');
+
+        if (imageElement) {
+          imageElement.classList.remove('opacity-100'); // Ocultar con transición
+          imageElement.classList.add('opacity-0');
+          setTimeout(() => { // Retrasar la eliminación de 'hidden' para que la transición se complete
+            imageElement.classList.add('hidden');
+            imageElement.src = ''; // Limpiar src para evitar carga innecesaria
+          }, 300); // Coincidir con la duración de la transición
+        }
+      }
+    }
+
+    // --- Mapeo de imágenes de ejemplo para cada servicio ---
+    // (Estas URLs son para los ejemplos que aparecen al hacer clic en la tarjeta)
+    const serviceExampleImages = {
+      'Esmaltado Semipermanente en Manos': 'https://i.imgur.com/AniVEAt.jpeg',
+      'Esmaltado Semipermanente en Pies': 'https://i.imgur.com/kZnT6R7.jpeg',
+      'Capping Gel': 'https://i.imgur.com/r1xWXaw.jpeg',
+      'Extensión Soft Gel': 'https://i.imgur.com/g0WjY9z.jpeg',
+      'Nail Art': 'https://i.imgur.com/FYF4QnI.jpeg'
+    };
+
+    // --- Lógica de validación y envío del formulario ---
+    const formFields = ['nombre', 'servicio', 'fechaHora', 'medioPago']; // Campos con validación
+    const errorMessages = {}; // Almacena referencias a los elementos de error
+    const submitButton = document.getElementById('submit-button');
+
+    // Inicializar referencias a los mensajes de error
+    formFields.forEach(field => {
+      errorMessages[field] = document.getElementById(`error-${field}`);
+      // Añadir event listeners para limpiar errores al escribir/cambiar
+      const inputElement = document.getElementById(field);
+      if (inputElement) {
+        inputElement.addEventListener('input', () => clearError(field));
+        inputElement.addEventListener('change', () => clearError(field));
+      }
+    });
+
+    /**
+     * Muestra un mensaje de error para un campo específico.
+     * @param {string} fieldId - El ID del campo.
+     * @param {string} message - El mensaje de error a mostrar.
+     */
+    function showError(fieldId, message) {
+      const errorElement = errorMessages[fieldId];
+      if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.add('active');
+        document.getElementById(fieldId).classList.add('border-red-500'); // Resaltar campo con error
+      }
+    }
+
+    /**
+     * Oculta el mensaje de error para un campo específico.
+     * @param {string} fieldId - El ID del campo.
+     */
+    function clearError(fieldId) {
+      const errorElement = errorMessages[fieldId];
+      if (errorElement) {
+        errorElement.textContent = '';
+        errorElement.classList.remove('active');
+        document.getElementById(fieldId).classList.remove('border-red-500');
+      }
+    }
+
+    /**
+     * Limpia todos los mensajes de error del formulario.
+     */
+    function clearAllErrors() {
+      formFields.forEach(clearError);
+    }
+
+    /**
+     * Maneja el envío del formulario: construye el mensaje de WhatsApp, abre el enlace y muestra el modal.
+     * @param {Event} e - El evento de envío del formulario.
+     */
+    async function enviarTurno(e) {
+      e.preventDefault();
+      clearAllErrors(); // Limpiar errores anteriores
+
+      submitButton.textContent = 'Enviando...'; // Cambiar texto del botón
+      submitButton.disabled = true; // Deshabilitar el botón
+      submitButton.classList.add('opacity-70', 'cursor-not-allowed'); // Indicar estado de carga
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const servicio = document.getElementById('servicio').value;
+      const fechaHoraInput = document.getElementById('fechaHora').value;
+      const comentario = document.getElementById('comentario').value.trim();
+      const medioPago = document.getElementById('medioPago').value;
+
+      let isValid = true;
+
+      if (!nombre) {
+        showError('nombre', 'Por favor, ingresa tu nombre completo.');
+        isValid = false;
+      }
+      if (!servicio) {
+        showError('servicio', 'Por favor, selecciona un servicio.');
+        isValid = false;
+      }
+      if (!medioPago) {
+        showError('medioPago', 'Por favor, selecciona un medio de pago preferido.');
+        isValid = false;
+      }
+      // Opcional: Validar que la fecha y hora no sea pasada
+      if (fechaHoraInput) {
+        const selectedDate = new Date(fechaHoraInput);
+        const now = new Date();
+        if (selectedDate < now) {
+          showError('fechaHora', 'La fecha y hora no pueden ser en el pasado.');
+          isValid = false;
+        }
+      } else {
+        showError('fechaHora', 'Por favor, selecciona una fecha y hora.');
+        isValid = false;
+      }
+
+
+      if (!isValid) {
+        // Si hay errores, no se envía el formulario ni se abre WhatsApp
+        showModal('Error en la Reserva', '<p>Por favor, corrige los errores en el formulario.</p>');
+        submitButton.textContent = 'Enviar solicitud por WhatsApp'; // Restaurar texto del botón
+        submitButton.disabled = false; // Habilitar el botón
+        submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+        return;
+      }
+
+      let fechaHoraFormateada = '';
+      if (fechaHoraInput) {
+        const date = new Date(fechaHoraInput);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        fechaHoraFormateada = date.toLocaleDateString('es-AR', options);
+      }
+
+      let mensajeWhatsApp = `¡Hola, Espléndida Manicuría!\n\nSoy ${nombre}.\n`;
+      mensajeWhatsApp += `Quisiera reservar un turno para: *${servicio}*.\n`;
+      if (fechaHoraFormateada) {
+        mensajeWhatsApp += `Mi fecha y hora preferida es: *${fechaHoraFormateada}*.\n`;
+      } else {
+        mensajeWhatsApp += `No especificó una fecha/hora, por favor, coordina conmigo.\n`;
+      }
+      if (comentario) {
+        mensajeWhatsApp += `Comentarios adicionales: ${comentario}\n`;
+      }
+      mensajeWhatsApp += `Medio de pago preferido: *${medioPago}*.\n`;
+      mensajeWhatsApp += `\n¡Gracias!`;
+
+      const whatsappUrl = `https://wa.me/5493493521676?text=${encodeURIComponent(mensajeWhatsApp)}`;
+
+      // Simular un pequeño retraso para que el "Enviando..." sea visible
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      window.open(whatsappUrl, '_blank');
+
+      showModal('¡Turno Solicitado!', '<p>Tu solicitud de turno ha sido enviada con éxito. ¡Pronto nos pondremos en contacto contigo por WhatsApp!</p>');
+
+      e.target.reset(); // Limpiar el formulario después del envío exitoso
+      submitButton.textContent = 'Enviar solicitud por WhatsApp'; // Restaurar texto del botón
+      submitButton.disabled = false; // Habilitar el botón
+      submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+    }
+
+    // --- Funciones para el modal genérico (y ahora lightbox) ---
+    const customModal = document.getElementById('custom-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBodyContent = document.getElementById('modal-body-content');
+    const modalContentDiv = document.querySelector('#custom-modal .modal-content'); // Referencia al div de contenido del modal
+
+    /**
+     * Muestra el modal con un título y contenido HTML.
+     * @param {string} title - El título del modal.
+     * @param {string} contentHtml - El contenido HTML a mostrar en el cuerpo del modal.
+     * @param {boolean} isLightbox - True si el modal debe comportarse como una lightbox.
+     */
+    function showModal(title, contentHtml, isLightbox = false) {
+      modalTitle.textContent = title;
+      modalBodyContent.innerHTML = contentHtml;
+
+      if (isLightbox) {
+        modalContentDiv.classList.add('lightbox-modal-content');
+        // Ocultar el botón de cerrar normal si la lightbox tiene sus propios controles de navegación
+        // o si el diseño lo requiere. En este caso, el botón de cerrar 'x' sigue siendo útil.
+      } else {
+        modalContentDiv.classList.remove('lightbox-modal-content');
+      }
+
+      customModal.classList.add('visible');
+      customModal.classList.remove('hidden');
+      customModal.focus();
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    function closeModal() {
+      customModal.classList.remove('visible');
+      setTimeout(() => {
+        modalBodyContent.innerHTML = '';
+        customModal.classList.add('hidden');
+        modalContentDiv.classList.remove('lightbox-modal-content'); // Asegurarse de quitar la clase lightbox
+      }, 300);
+      document.removeEventListener('keydown', handleEscapeKey);
+    }
+
+    function handleEscapeKey(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    }
+
+    // --- Intersection Observer para animaciones al hacer scroll ---
+    const sections = document.querySelectorAll('.animate-on-scroll');
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: '0px',
+      threshold: 0.1 // 10% del elemento visible para activar
+    };
+
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target); // Dejar de observar una vez que se ha animado
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+
+    // Inicializa la galería al cargar la página.
+    window.onload = function() {
+      loadGalleryThumbnails();
+      showSlide(0); // Mostrar la primera imagen del carrusel al cargar
+      startAutoSlideshow(); // Iniciar el carrusel automático
+      adjustBodyPadding(); // Asegurarse de ajustar el padding en la carga inicial
+    };
+  </script>
+
+</body>
+</html>
+
